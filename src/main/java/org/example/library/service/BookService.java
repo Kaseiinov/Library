@@ -5,6 +5,7 @@ import org.example.library.Repository.BookRepository;
 import org.example.library.dto.BookDto;
 import org.example.library.dto.CategoryDto;
 import org.example.library.model.Book;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +21,11 @@ public class BookService {
     private final BookRepository bookRepository;
     private final UserService userService;
     private final CategoryService categoryService;
+
+    public BookDto findById(Long id) throws ChangeSetPersister.NotFoundException {
+        Book book = bookRepository.findById(id).orElseThrow(ChangeSetPersister.NotFoundException::new);
+        return convertToDto(book);
+    }
 
     public Page<BookDto> findAllByCategory(String category, Pageable pageable) {
         Page<Book> books;
@@ -28,6 +35,18 @@ public class BookService {
             books = bookRepository.findAllByCategoryCategory(category, pageable);
         }
         return convertDtoToModel(books);
+    }
+
+    public BookDto convertToDto(Book book) {
+        return BookDto
+                .builder()
+                .id(book.getId())
+                .name(book.getName())
+                .author(book.getAuthor())
+                .avatar(book.getAvatar())
+                .available(book.getAvailable())
+                .returnDate(book.getReturnDate())
+                .build();
     }
 
     public Page<BookDto> convertDtoToModel(Page<Book> books){

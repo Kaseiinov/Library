@@ -27,7 +27,7 @@
             </aside>
 
             <!-- Books Section -->
-            <main class="col-12 col-md-9 col-lg-10 ">
+            <main class="col-12 col-md-9 col-lg-10">
                 <div class="row g-3">
                     <#if books??>
                         <#list books as book>
@@ -37,14 +37,15 @@
                                     <div class="card-body d-flex flex-column">
                                         <h6 class="card-title">Author -> ${book.author} <br> Name -> ${book.name}</h6>
                                         <#if book.available?? && book.available>
-                                            <p class="text-success">Available</p>
+                                            <p class="text-success mb-2">Available</p>
+                                            <a href="/users/get_book/${book.id}" class="btn btn-primary mt-auto" style="min-height: 38px;">Получить</a>
                                         <#else>
-                                            <p class="text-danger">Not available</p>
+                                            <p class="text-danger mb-2">Not available</p>
+                                            <button class="btn btn-secondary mt-auto" disabled style="min-height: 38px;">Недоступно</button>
                                         </#if>
                                         <#if book.returnDate??>
-                                            <p>Date of return -> ${book.returnDate}</p>
+                                            <p class="text-muted small mt-2">Date of return: ${book.returnDate}</p>
                                         </#if>
-                                        <button class="btn btn-primary mt-auto">Получить</button>
                                     </div>
                                 </div>
                             </div>
@@ -57,7 +58,7 @@
 
         <!-- Navigation - всегда внизу -->
         <#if items.getTotalElements() gt 0>
-            <div class="mt-auto"> <!-- mt-auto для прижатия к низу -->
+            <div class="mt-auto">
                 <nav id="navigation" aria-label="..." class="d-flex justify-content-center py-3">
                     <ul class="pagination mb-0">
                         <li class="page-item <#if items.first>disabled</#if>">
