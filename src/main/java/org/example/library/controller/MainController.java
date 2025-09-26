@@ -7,9 +7,12 @@ import org.example.library.model.Category;
 import org.example.library.service.BookService;
 import org.example.library.service.CategoryService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -20,8 +23,8 @@ public class MainController {
     private final CategoryService categoryService;
 
     @GetMapping
-    public String index(Model model) {
-        Page<BookDto> books = bookService.findAll();
+    public String index(@PageableDefault(size = 6)Pageable pageable, @RequestParam(required = false) String category, Model model) {
+        Page<BookDto> books = bookService.findAllByCategory(category, pageable);
         List<CategoryDto> categories = categoryService.findAll();
         model.addAttribute("books", books.getContent());
         model.addAttribute("categories", categories);

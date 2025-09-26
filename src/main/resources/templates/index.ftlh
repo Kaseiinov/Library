@@ -18,10 +18,10 @@
             <aside class="col-12 col-md-3 col-lg-2 mb-4">
                 <h5 class="fw-bold">Жанры:</h5>
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action active">Все</a>
+                    <a href="/" class="list-group-item list-group-item-action active">Все</a>
                     <#if categories??>
                         <#list categories as category>
-                            <a href="#" class="list-group-item list-group-item-action">${category.category}</a>
+                            <a href="?category=${category.category}" class="list-group-item list-group-item-action">${category.category}</a>
                         </#list>
                     </#if>
                 </div>

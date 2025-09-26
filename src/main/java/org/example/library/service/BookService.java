@@ -20,9 +20,13 @@ public class BookService {
     private final UserService userService;
     private final CategoryService categoryService;
 
-    public Page<BookDto> findAll(){
-        Pageable pageable = PageRequest.of(0, 5);
-        Page<Book> books = bookRepository.findAll(pageable);
+    public Page<BookDto> findAllByCategory(String category, Pageable pageable) {
+        Page<Book> books;
+        if(category == null) {
+            books = bookRepository.findAll(pageable);
+        }else {
+            books = bookRepository.findAllByCategoryCategory(category, pageable);
+        }
         return convertDtoToModel(books);
     }
 
