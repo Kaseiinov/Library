@@ -27,7 +27,7 @@ public class GlobalControllerAdvice {
         return "errors/error";
     }
 
-    @ExceptionHandler(EmailAlreadyExistsException.class)
+    @ExceptionHandler(UserAlreadyExistsException.class)
     public String handleEmailAlreadyExists(Model model, HttpServletRequest request) {
         model.addAttribute("status", HttpStatus.CONFLICT.value());
         model.addAttribute("reason", HttpStatus.CONFLICT.getReasonPhrase());

@@ -54,8 +54,8 @@
                             </div>
 
                             <div data-mdb-input-init class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3cg">Your Email</label>
-                                <@spring.formInput "userDto.email" 'id="form3Example3cg" class="form-control form-control-lg"' />
+                                <label class="form-label" for="form3Example3cg">Your passport number</label>
+                                <@spring.formInput "userDto.passport" 'id="form3Example3cg" class="form-control form-control-lg"' />
                                 <@spring.showErrors "<br>" "error text-danger" />
                             </div>
 

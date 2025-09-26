@@ -18,7 +18,7 @@ import java.util.List;
 public class BookService {
     private final BookRepository bookRepository;
     private final UserService userService;
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
 
     public Page<BookDto> findAll(){
         Pageable pageable = PageRequest.of(0, 5);
