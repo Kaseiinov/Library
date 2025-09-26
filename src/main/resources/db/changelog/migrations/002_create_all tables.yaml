@@ -1,0 +1,145 @@
+databaseChangeLog:
+  - changeSet:
+      id: create all tables
+      author: Kaseiinov_I
+      changes:
+        - createTable:
+            tableName: book
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: author
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: available
+                  type: boolean
+              - column:
+                  name: avatar
+                  type: varchar(255)
+              - column:
+                  name: return_date
+                  type: date
+              - column:
+                  name: category_id
+                  type: bigint
+
+        - addForeignKeyConstraint:
+            baseTableName: roles_authorities
+            baseColumnNames: role_id
+            constraintName: fk_book_category_id
+            referencedTableName: roles
+            referencedColumnNames: id
+            onDelete: RESTRICT
+            onUpdate: cascade
+
+
+
+        - createTable:
+            tableName: category
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: category
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: history
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+#              - column:
+#                  name: flight_number
+#                  type: varchar(45)
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: airline_id
+#                  type: bigint
+#                  constraints:
+#                    foreignKeyName: airline_id_flight
+#                    referencedTableName: airline
+#                    nullable: false
+#              - column:
+#                  name: business_id
+#                  type: bigint
+#                  constraints:
+#                    foreignKeyName: business_id_flight
+#                    referencedTableName: businesses
+#                    nullable: false
+#              - column:
+#                  name: economy_id
+#                  type: bigint
+#                  constraints:
+#                    foreignKeyName: economy_id_flight
+#                    referencedTableName: economies
+#                    nullable: false
+#              - column:
+#                  name: departure
+#                  type: varchar(45)
+#              - column:
+#                  name: destination
+#                  type: varchar(45)
+#              - column:
+#                  name: departure_time
+#                  type: timestamp
+#              - column:
+#                  name: arrival_time
+#                  type: timestamp
+
+
+        - createTable:
+            tableName: usr_books
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+              - column:
+                  name: book_id
+                  type: bigint
+
+        - addForeignKeyConstraint:
+            baseTableName: usr_books
+            baseColumnNames: user_id
+            constraintName: fk_user_books_user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            onDelete: RESTRICT
+            onUpdate: CASCADE
+
+        - addForeignKeyConstraint:
+            baseTableName: usr_books
+            baseColumnNames: book_id
+            constraintName: fk_user_books_book_id
+            referencedTableName: book
+            referencedColumnNames: id
+            onDelete: RESTRICT
+            onUpdate: CASCADE
+
+
+

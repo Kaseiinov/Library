@@ -12,14 +12,10 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "history")
 public class History {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate dateOfReceipt;
-    private String state;
+//    private LocalDate dateOfReceipt;
+//    private String state;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")

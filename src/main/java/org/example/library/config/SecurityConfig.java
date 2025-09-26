@@ -1,7 +1,7 @@
 package org.example.library.config;
 
-import kg.attractor.airline.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.example.library.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

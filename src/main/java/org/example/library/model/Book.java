@@ -24,13 +24,14 @@ public class Book {
     @Column(name = "return_date")
     private LocalDate returnDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private History history;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    private History history;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "books")
     private List<User> users;
 
     @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
 }

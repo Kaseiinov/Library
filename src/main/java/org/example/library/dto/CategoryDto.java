@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 public class CategoryDto {
     private Long id;
-    private String name;
+    private String category;
 
     private List<BookDto> books;
 }

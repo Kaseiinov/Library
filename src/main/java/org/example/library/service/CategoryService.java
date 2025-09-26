@@ -20,7 +20,7 @@ public class CategoryService {
         return CategoryDto
                 .builder()
                 .id(category.getId())
-                .name(category.getName())
+                .category(category.getCategory())
                 .build();
     }
 

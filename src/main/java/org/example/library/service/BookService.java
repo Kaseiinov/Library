@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.example.library.Repository.BookRepository;
 import org.example.library.dto.BookDto;
 import org.example.library.dto.CategoryDto;
-import org.example.library.dto.HistoryDto;
-import org.example.library.dto.UserDto;
 import org.example.library.model.Book;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
