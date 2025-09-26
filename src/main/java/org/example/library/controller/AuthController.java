@@ -1,5 +1,6 @@
 package org.example.library.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.library.dto.UserDto;
@@ -26,10 +27,10 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid UserDto userDto, BindingResult bindingResult, Model model) throws UserAlreadyExistsException {
+    public String register(@Valid UserDto userDto, BindingResult bindingResult, Model model, HttpServletRequest request) throws UserAlreadyExistsException {
         if(!bindingResult.hasErrors()){
-            userService.save(userDto);
-            return "redirect:/auth/login";
+            userService.save(userDto, request);
+            return "redirect:/users/get_ticket";
         }
         model.addAttribute("userDto", userDto);
         return "/auth/register";

@@ -17,5 +17,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findUserByPassport(String passport);
 
+    User findByPassport(String passport);
+
     boolean existsUserByPassport(String passport);
 }

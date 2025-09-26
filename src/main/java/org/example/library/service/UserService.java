@@ -1,7 +1,11 @@
 package org.example.library.service;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.library.Repository.UserRepository;
+import org.example.library.dto.TicketDto;
 import org.example.library.dto.UserDto;
 import org.example.library.exception.UserAlreadyExistsException;
 import org.example.library.exception.UserNotFoundException;
@@ -13,15 +17,43 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final RoleService roleService;
     private final PasswordEncoder encoder;
 
-    public void save(UserDto userDto) throws UserAlreadyExistsException {
+    public void authWithHttpServletRequest(HttpServletRequest request, String passport, String password) {
+        try {
+            request.login(passport, password);
+        } catch (ServletException e) {
+            log.error("Error while login ", e);
+        }
+    }
+
+    public UserDto findByPassport(String passport) {
+        User user = userRepository.findByPassport(passport);
+        if(user != null) {
+            return convertToDto(user);
+        }
+        return null;
+    }
+
+    public String getTicket(TicketDto ticketDto) {
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        String shortId = uuid.substring(0, 5);
+
+        User user = userRepository.findUserByPassport(ticketDto.getPassport()).orElseThrow(UserNotFoundException::new);
+        user.setTicket(shortId);
+        userRepository.save(user);
+        return shortId;
+    }
+
+    public void save(UserDto userDto, HttpServletRequest request) throws UserAlreadyExistsException {
         boolean isUserExists = userRepository.existsUserByPassport(userDto.getPassport());
         if(isUserExists){
             throw new UserAlreadyExistsException();
@@ -32,6 +64,8 @@ public class UserService implements UserDetailsService {
         user.setRoles(List.of(role));
 
         userRepository.save(user);
+        authWithHttpServletRequest(request, userDto.getPassport(), userDto.getPassword());
+        log.info("Auto authenticated");
     }
 
     public List<UserDto> findAllByBookId(Long bookId) {
@@ -58,6 +92,19 @@ public class UserService implements UserDetailsService {
                         .ticket(u.getTicket())
                         .build()
                 ).toList();
+    }
+
+    public UserDto convertToDto(User user) {
+        return UserDto
+                .builder()
+                .id(user.getId())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .password(user.getPassword())
+                .passport(user.getPassport())
+                .enabled(user.getEnabled())
+                .ticket(user.getTicket())
+                .build();
     }
 
     public UserDetails loadUserByUsername(String username) throws UserNotFoundException {

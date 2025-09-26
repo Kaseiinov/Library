@@ -9,10 +9,9 @@
         >
     </#if>
 
-
     <!-- Content -->
-    <div class="container-fluid mt-4">
-        <div class="row">
+    <div class="container-fluid mt-4 d-flex flex-column min-vh-100">
+        <div class="row flex-grow-1">
 
             <!-- Sidebar -->
             <aside class="col-12 col-md-3 col-lg-2 mb-4">
@@ -28,14 +27,13 @@
             </aside>
 
             <!-- Books Section -->
-            <main class="col-12 col-md-9 col-lg-10">
+            <main class="col-12 col-md-9 col-lg-10 ">
                 <div class="row g-3">
-
                     <#if books??>
                         <#list books as book>
                             <div class="col-12 col-sm-6 col-lg-4">
                                 <div class="card h-100 shadow-sm">
-                                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Book">
+                                    <img src="/images/byName/${book.avatar}" width="80" height="200" class="card-img-top" alt="Book">
                                     <div class="card-body d-flex flex-column">
                                         <h6 class="card-title">${book.author} <br>${book.name}</h6>
                                         <button class="btn btn-primary mt-auto">Получить</button>
@@ -44,13 +42,37 @@
                             </div>
                         </#list>
                     </#if>
-
-
                 </div>
             </main>
 
         </div>
-    </div>
 
+        <!-- Navigation - всегда внизу -->
+        <#if items.getTotalElements() gt 0>
+            <div class="mt-auto"> <!-- mt-auto для прижатия к низу -->
+                <nav id="navigation" aria-label="..." class="d-flex justify-content-center py-3">
+                    <ul class="pagination mb-0">
+                        <li class="page-item <#if items.first>disabled</#if>">
+                            <a class="page-link" href="?page=${items.getNumber()-1}&size=${items.size}">
+                                previous
+                            </a>
+                        </li>
+
+                        <#list 1..items.getTotalPages() as page>
+                            <li class="page-item <#if page = items.getNumber() + 1>active</#if>" aria-current="page">
+                                <a class="page-link" href="?page=${page - 1}&size=${items.size}">${page}</a>
+                            </li>
+                        </#list>
+
+                        <li class="page-item <#if items.last>disabled</#if>">
+                            <a class="page-link" href="?page=${items.getNumber()+1}&size=${items.size}">
+                                next
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </#if>
+    </div>
 
 </@main.layout>

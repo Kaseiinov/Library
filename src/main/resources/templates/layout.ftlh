@@ -34,27 +34,27 @@
                     <#--                <li class="nav-item">-->
                     <#--                    <a class="nav-link" href="/users/profile">Profile</a>-->
                     <#--                </li>-->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Vacancies
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/vacancies">Vacancies</a></li>
-                            <li><a class="dropdown-item" href="/vacancies/create">Vacancies create</a></li>
-                        </ul>
-                    </li>
+<#--                    <li class="nav-item dropdown">-->
+<#--                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<#--                            Vacancies-->
+<#--                        </a>-->
+<#--                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<#--                            <li><a class="dropdown-item" href="/vacancies">Vacancies</a></li>-->
+<#--                            <li><a class="dropdown-item" href="/vacancies/create">Vacancies create</a></li>-->
+<#--                        </ul>-->
+<#--                    </li>-->
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Resumes
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/resumes">Resumes</a></li>
-                            <li><a class="dropdown-item" href="/resumes/create">Resume create</a></li>
+<#--                    <li class="nav-item dropdown">-->
+<#--                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<#--                            Resumes-->
+<#--                        </a>-->
+<#--                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<#--                            <li><a class="dropdown-item" href="/resumes">Resumes</a></li>-->
+<#--                            <li><a class="dropdown-item" href="/resumes/create">Resume create</a></li>-->
 
-                        </ul>
+<#--                        </ul>-->
 
-                    </li>
+<#--                    </li>-->
 
                 </ul>
                 <#--            <a href="/auth/login" class="btn btn-outline-success ">Login</a>-->

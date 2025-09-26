@@ -12,7 +12,7 @@ public class ImageService {
     private final FileUtil fileUtil;
 
     public ResponseEntity<?> findImageByFileName(String fileName){
-        return fileUtil.getOutputFile(fileName, "files", MediaType.IMAGE_JPEG);
+        return fileUtil.getOutputFile(fileName, "images", MediaType.IMAGE_JPEG);
     }
 
 //    public void create(ImageDto imageDto){

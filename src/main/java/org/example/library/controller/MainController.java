@@ -23,11 +23,16 @@ public class MainController {
     private final CategoryService categoryService;
 
     @GetMapping
-    public String index(@PageableDefault(size = 6)Pageable pageable, @RequestParam(required = false) String category, Model model) {
+    public String index(@PageableDefault(size = 6)Pageable pageable,
+                        @RequestParam(required = false) String category,
+                        @RequestParam(required = false) String ticket,
+                        Model model) {
         Page<BookDto> books = bookService.findAllByCategory(category, pageable);
         List<CategoryDto> categories = categoryService.findAll();
         model.addAttribute("books", books.getContent());
+        model.addAttribute("items", books);
         model.addAttribute("categories", categories);
+        model.addAttribute("ticket", ticket);
 
         return "index";
     }
