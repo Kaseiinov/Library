@@ -32,8 +32,8 @@ VALUES ('John', 'Doe', 'AB123', '$2a$10$6nut.IFSaV9Ez2v3zKutyeHpYVUTIpex8fWPAi8C
 INSERT INTO usr_roles (user_id, role_id)
 VALUES (1, 1),
        (2, 1),
-       (3, 2),
-       (4, 3);
+       (3, 1),
+       (4, 1);
 
 INSERT INTO book (name, author, available, avatar, return_date, category_id)
 VALUES ('The Great Gatsby', 'F. Scott Fitzgerald', true, 'images.jpeg', NULL, 1),

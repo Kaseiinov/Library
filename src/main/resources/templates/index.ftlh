@@ -35,7 +35,15 @@
                                 <div class="card h-100 shadow-sm">
                                     <img src="/images/byName/${book.avatar}" width="80" height="200" class="card-img-top" alt="Book">
                                     <div class="card-body d-flex flex-column">
-                                        <h6 class="card-title">${book.author} <br>${book.name}</h6>
+                                        <h6 class="card-title">Author -> ${book.author} <br> Name -> ${book.name}</h6>
+                                        <#if book.available?? && book.available>
+                                            <p class="text-success">Available</p>
+                                        <#else>
+                                            <p class="text-danger">Not available</p>
+                                        </#if>
+                                        <#if book.returnDate??>
+                                            <p>Date of return -> ${book.returnDate}</p>
+                                        </#if>
                                         <button class="btn btn-primary mt-auto">Получить</button>
                                     </div>
                                 </div>
